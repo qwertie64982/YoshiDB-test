@@ -11,12 +11,19 @@ import android.widget.ListView
 
 class MainActivity : AppCompatActivity() {
 
-    var tempList = arrayOf("test1", "test2", "test3")
+    private var tempList = ArrayList<String>()
+    private var tempList2 = ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        // Test if it can scroll down
+        for (i in 1..20) {
+            tempList.add("yoshi $i")
+            tempList2.add(R.drawable.fillericon)
+        }
 
         // fab temp snackbar demo (yummy)
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
@@ -24,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tempList)
+        val adapter = YoshiListAdapter(this, tempList, tempList2)
         val yoshiListView: ListView = findViewById(R.id.yoshi_list_view)
         yoshiListView.adapter = adapter
     }
