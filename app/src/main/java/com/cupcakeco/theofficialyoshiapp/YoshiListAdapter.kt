@@ -20,7 +20,7 @@ class YoshiListAdapter(
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater
-        val rowView = inflater.inflate(R.layout.yoshi_list, null, true)
+        val rowView = inflater.inflate(R.layout.yoshi_list, null, true) // TODO: do this better
 
         val nameTextView = rowView.findViewById(R.id.name) as TextView
         val imageView = rowView.findViewById(R.id.icon) as ImageView
