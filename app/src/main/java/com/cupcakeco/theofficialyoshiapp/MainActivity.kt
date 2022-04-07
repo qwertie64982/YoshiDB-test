@@ -8,11 +8,16 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.cupcakeco.theofficialyoshiapp.models.Yoshi
+import com.cupcakeco.theofficialyoshiapp.models.YoshiRecyclerAdapter
 
 class MainActivity : AppCompatActivity() {
 
     private var tempList = ArrayList<String>()
     private var tempList2 = ArrayList<Int>()
+    private var tempYoshiList = ArrayList<Yoshi>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +25,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         // Test if it can scroll down
-        for (i in 1..20) {
+        for (i in 1..1000) {
+            val tempYosh = Yoshi()
+            tempYosh.name = "yoshi $i"
+            tempYoshiList.add(tempYosh)
+
             tempList.add("yoshi $i")
             tempList2.add(R.drawable.fillericon)
         }
@@ -31,9 +40,10 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        val adapter = YoshiListAdapter(this, tempList, tempList2)
-        val yoshiListView: ListView = findViewById(R.id.yoshi_list_view)
-        yoshiListView.adapter = adapter
+        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = YoshiRecyclerAdapter(tempYoshiList)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
